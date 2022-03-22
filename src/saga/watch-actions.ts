@@ -9,9 +9,7 @@ export default function* () {
 
 function* watchSaga() {
   yield takeEvery('*', function* (action: PayloadAction<[() => void, string, string]>) {
-    if (!action.type.endsWith('REQUEST')) {
-      return;
-    }
+
     try {
       const response: any = yield call(action.payload[0]);
       yield put({type: action.payload[1], payload: response});

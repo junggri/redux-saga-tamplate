@@ -9,7 +9,7 @@ interface IReducer<State, Payload, Failure = Error> {
 
 export default function ReducerMap<State, Payload, Failure = Error>(
   type: string,
-  reducer: IReducer<State, Payload>
+  reducer: IReducer<State, Payload, Failure>
 ) {
 
   const {REQUEST, SUCCESS, FAILURE} = createActionType(type);
