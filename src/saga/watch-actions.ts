@@ -1,4 +1,4 @@
-import {all, put, call, takeEvery} from "redux-saga/effects";
+import {all, call, put, takeEvery} from "redux-saga/effects";
 import {PayloadAction} from "@reduxjs/toolkit";
 
 export default function* () {
@@ -12,6 +12,9 @@ function* watchSaga() {
 
     try {
       const response: any = yield call(action.payload[0]);
+      if (response.errors) {
+        throw new Error(response.errors[0].message)
+      }
       yield put({type: action.payload[1], payload: response});
     } catch (e) {
       yield put({type: action.payload[2], payload: e});
